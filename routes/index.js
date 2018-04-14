@@ -48,7 +48,8 @@ router.post('/rune', async (ctx, next) => {
     }
   }
 })
-// 获取 sesstion key
+
+// 获取 手机号
 router.post('/getPhone', async (ctx, next) => {
   let { encryptedData, iv, code } = ctx.request.body;
   let res = await rep(`https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${ctx.request.body.code}&grant_type=authorization_code`)
@@ -109,6 +110,7 @@ router.post('/login', async (ctx, next) => {
 })
 // 保存formid
 router.post('/formid', async (ctx, next) => {
+  console.log(113, ctx.request.body)
   const { formid, openid } = ctx.request.body;
   let user = await UserModel.findOne({ openid });
 
