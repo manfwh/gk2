@@ -9,7 +9,7 @@ const index = require('./routes/index')
 const request = require('request')
 const fs = require('fs')
 const UserModel = require('./model/user')
-const { appid, secret, url, template_id, template, day } = require('./config')
+const { appid, secret, url, template_id, template, day, mongodbUrl } = require('./config')
 // error handler
 
 // 获取小程序吗
@@ -17,7 +17,7 @@ getAccess_token()
 // 2小时更新一次 Access_token
 setInterval(getAccess_token, 7200 * 1000)
 onerror(app)
-mongoose.connect('mongodb://localhost/zhuli');
+mongoose.connect(mongodbUrl);
 
 // 启动服务后查询数据库还没有发送模板消息的用户， 启动定时任务
 UserModel.find({ isSend: false }, (err, users) => {
