@@ -27,7 +27,6 @@ router.post('/rune', async (ctx, next) => {
           rune
         }
       }
-
     } else {
       let newRune = new RuneModel({
         owner: user._id
@@ -58,16 +57,14 @@ router.post('/getPhone', async (ctx, next) => {
   var pc = new WXBizDataCrypt(appid, session_key)
 
   var data = pc.decryptData(encryptedData, iv)
-  await UserModel.findOneAndUpdate({openid}, {phone: data.phoneNumber})
-  ctx.status =204
+  await UserModel.findOneAndUpdate({ openid }, { phone: data.phoneNumber })
+  ctx.status = 204
   console.log('解密后 data: ', data)
 })
 // 获取助力信息
 router.get('/rune/:runeid', async (ctx, next) => {
   const runeid = ctx.params.runeid;
-  console.log(runeid)
   let rune = await RuneModel.findById(runeid).populate('owner', 'nickName avatarUrl gender');
-  console.log(rune)
   ctx.body = rune
   //.populate('helps', 'avatarUrl').exec()
 })
@@ -99,7 +96,6 @@ router.post('/login', async (ctx, next) => {
   let res = await rep(`https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${ctx.request.body.code}&grant_type=authorization_code`)
   let { openid } = JSON.parse(res)
   let hasUser = await UserModel.findOne({ openid })
-  console.log(hasUser)
   if (hasUser) {
     ctx.body = hasUser.openid
   } else {
@@ -110,17 +106,10 @@ router.post('/login', async (ctx, next) => {
     ctx.body = openid;
   }
 
-  //  res;
-  // let res = await rq();
-  // console.log(res)
-  // ctx.body = res;
-
 })
 // 保存formid
 router.post('/formid', async (ctx, next) => {
-  console.log(ctx.request.body)
   const { formid, openid } = ctx.request.body;
-  console.log(formid)
   let user = await UserModel.findOne({ openid });
 
   setTimeout(() => {
@@ -136,14 +125,14 @@ router.post('/formid', async (ctx, next) => {
         touser: openid,
         template_id,
         form_id,
-        page: 'about?',
-        data
+        page: 'pages/about',
+        data,
+        // emphasis_keyword: "keyword1.DATA" 
       },
       json: true
     }
     request(options, (err, res, body) => {
       if (err) next(err)
-      console.log(body)
       UserModel.findOneAndUpdate({ openid }, { isSend: true })
     })
   }
@@ -156,36 +145,37 @@ router.post('/formid', async (ctx, next) => {
     code: 20000
   }
 })
-router.get('/send', async (ctx, next) => {
-  let options = {
-    url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${ctx.access_token}`,
-    method: 'POST',
-    body: {
-      touser: 'oArrS5MKQuKv8SDuQB-LLpsQKdE0',
-      template_id: '-NNE30zgta--97raIBLxpDONSkjG3XT3VQnoopb1-ww',
-      form_id: 1523591113120,
-      page: 'about?',
-      data: template
-    },
-    json: true
-  }
-  request(options, (err, res, body) => {
-    if (err) console.log(err)
-    console.log(body)
-  })
-})
+
+// router.get('/send', async (ctx, next) => {
+//   let options = {
+//     url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${ctx.access_token}`,
+//     method: 'POST',
+//     body: {
+//       touser: 'oArrS5MKQuKv8SDuQB-LLpsQKdE0',
+//       template_id: '-NNE30zgta--97raIBLxpDONSkjG3XT3VQnoopb1-ww',
+//       form_id: 1523591113120,
+//       page: 'about?',
+//       data: template
+//     },
+//     json: true
+//   }
+//   request(options, (err, res, body) => {
+//     if (err) console.log(err)
+//     console.log(body)
+//   })
+// })
 
 
 
 
 // 获取二维码
 router.get('/qr', async (ctx, next) => {
-  let openid = ctx.query.openid;
-  let options = {
+  let runeid = ctx.query.runeid;
+  let getQrOptions = {
     url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${ctx.access_token}`,
     body: {
-      path: '/pages/help?' + openid,
-      scene: openid,
+      path: '/pages/help?runeid=' + runeid,
+      scene: runeid,
       width: 214,
       line_color: { r: '65', g: '224', b: '95' }
     },
@@ -195,16 +185,16 @@ router.get('/qr', async (ctx, next) => {
     },
     json: true
   }
+  ctx.body = await saveQr()  
   function saveQr() {
     return new Promise(resolve => {
-      let write = fs.createWriteStream('./public/images/' + openid + '.png');
-      request(options).pipe(write)
+      let write = fs.createWriteStream('./public/images/' + runeid + '.png');
+      request(getQrOptions).pipe(write)
       write.on('finish', () => {
-        resolve(`${url}/images/${openid}.png`)
+        resolve(`${url}/images/${runeid}.png`)
       })
     })
   }
-  ctx.body = await saveQr()
 })
 
 

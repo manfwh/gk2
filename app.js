@@ -21,7 +21,6 @@ mongoose.connect('mongodb://localhost/zhuli');
 
 // 启动服务后查询数据库还没有发送模板消息的用户， 启动定时任务
 UserModel.find({ isSend: false }, (err, users) => {
-  console.log('interval')
   users.forEach((user) => {
     setTimeout(function () {
       let options = {
@@ -46,7 +45,7 @@ UserModel.find({ isSend: false }, (err, users) => {
 
       })
 
-    }, day * 24 * 60 * 60 * 1000 - (Date.now().getTime() - user.createAt.getTime()))//  
+    }, day * 24 * 60 * 60 * 1000 - (new Date().getTime() - user.createAt.getTime()))//  
 
   })
 })

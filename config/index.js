@@ -4,28 +4,16 @@ module.exports = {
   url: 'http://192.168.31.204:3000',
   host: '192.168.31.204',
   port: 3000,
-  template_id: '-NNE30zgta--97raIBLxpDONSkjG3XT3VQnoopb1-ww',
+  template_id: '-NNE30zgta--97raIBLxpE1H9-mwi37OnYFX7zr2LXk',
   day: 6, // 默认6天后发送模板消息
   template: {
     "keyword1": {
-      "value": '活动标题',
-      "color": "#173177"
+      "value": '恭喜您获得公务员考试面试资格',
+      "color": "#000"
     },
     "keyword2": {
-      "value": '活动说明',
-      "color": "#173177"
-    },
-    "keyword3": {
-      "value": '活动时间',
-      "color": "#173177"
-    },
-    "keyword4": {
-      "value": '发起人',
-      "color": "#173177"
-    },
-    "keyword5": {
-      "value": '备注',
-      "color": "#173177"
+      "value": '点击查看详情',
+      "color": "#000"
     }
   }
 }
