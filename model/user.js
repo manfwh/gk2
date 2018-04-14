@@ -12,7 +12,7 @@ const UserShcema = new Schema({
   city: String,
   province: String,
   country: String,
-  phone: Number,
+  phone: String,
   formid: String,  // 用户发送模板消息
   isSend: {
     type: Boolean,
