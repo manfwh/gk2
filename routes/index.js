@@ -52,15 +52,17 @@ router.post('/rune', async (ctx, next) => {
 // 获取 手机号
 router.post('/getPhone', async (ctx, next) => {
   let { encryptedData, iv, code } = ctx.request.body;
-  let res = await rep(`https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${ctx.request.body.code}&grant_type=authorization_code`)
+  let res = await rep(`https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${code}&grant_type=authorization_code`)
   let { openid, session_key } = JSON.parse(res)
 
   var pc = new WXBizDataCrypt(appid, session_key)
 
   var data = pc.decryptData(encryptedData, iv)
+  console.log(data)
   await UserModel.findOneAndUpdate({ openid }, { phone: data.phoneNumber })
+
+  console.log('解密后 data: ', data)  
   ctx.status = 204
-  console.log('解密后 data: ', data)
 })
 // 获取助力信息
 router.get('/rune/:runeid', async (ctx, next) => {
