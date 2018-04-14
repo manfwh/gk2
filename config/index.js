@@ -1,7 +1,8 @@
 module.exports = {
   appid: 'wx42440125bfabc34f',
   secret: 'f3ddf0eebfaea4419c32c71a9b60ab69',
-  mongodbUrl:'mongodb://yidou:a199210206@ds063536.mlab.com:63536/gaokao',
+  // mongodbUrl:'mongodb://yidou:a199210206@ds063536.mlab.com:63536/gaokao',
+  mongodbUrl: 'mongodb://localhost/gongkao',
   url: 'http://192.168.31.204:3000',
   host: '192.168.31.204',
   port: 3000,
