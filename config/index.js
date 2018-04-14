@@ -6,7 +6,7 @@ module.exports = {
   url: 'https://xcx.sunpun.com',
   host: '192.168.31.204',
   port: 3000,
-  template_id: '-NNE30zgta--97raIBLxpE1H9-mwi37OnYFX7zr2LXk',
+  template_id: 'N1o2a1RPpzExxUQ9nGVB71d7vz3aqxz-dYMzApT3CEI',
   day: 6, // 默认6天后发送模板消息
   template: {
     "keyword1": {
