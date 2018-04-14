@@ -6,7 +6,7 @@ const rep = require('request-promise-native');
 const schedule = require("node-schedule")
 const WXBizDataCrypt = require('../utils/WXBizDataCrypt')
 const fs = require('fs')
-const { appid, secret, url, template_id, template } = require('../config');
+const { appid, secret, url, template_id, template, day } = require('../config');
 // 领取考神符
 router.post('/rune', async (ctx, next) => {
   let { openid, nickName, gender, avatarUrl, city, province, country } = ctx.request.body;
@@ -146,24 +146,7 @@ router.post('/formid', async (ctx, next) => {
   }
 })
 
-// router.get('/send', async (ctx, next) => {
-//   let options = {
-//     url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${ctx.access_token}`,
-//     method: 'POST',
-//     body: {
-//       touser: 'oArrS5MKQuKv8SDuQB-LLpsQKdE0',
-//       template_id: '-NNE30zgta--97raIBLxpDONSkjG3XT3VQnoopb1-ww',
-//       form_id: 1523591113120,
-//       page: 'about?',
-//       data: template
-//     },
-//     json: true
-//   }
-//   request(options, (err, res, body) => {
-//     if (err) console.log(err)
-//     console.log(body)
-//   })
-// })
+
 
 
 
