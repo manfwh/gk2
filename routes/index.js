@@ -58,7 +58,6 @@ router.post('/getPhone', async (ctx, next) => {
   var pc = new WXBizDataCrypt(appid, session_key)
 
   var data = pc.decryptData(encryptedData, iv)
-  console.log(data)
   await UserModel.findOneAndUpdate({ openid }, { phone: data.phoneNumber })
 
   console.log('解密后 data: ', data)  
@@ -131,7 +130,7 @@ router.post('/formid', async (ctx, next) => {
         form_id,
         page: 'pages/about',
         data,
-        // emphasis_keyword: "keyword1.DATA" 
+        emphasis_keyword: "keyword1.DATA" 
       },
       json: true
     }
@@ -149,11 +148,6 @@ router.post('/formid', async (ctx, next) => {
     code: 20000
   }
 })
-
-
-
-
-// 公务员面试资格
 
 // 获取二维码
 router.get('/qr', async (ctx, next) => {

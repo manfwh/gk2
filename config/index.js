@@ -6,14 +6,18 @@ module.exports = {
   url: 'https://xcx.sunpun.com',
   host: '192.168.31.204',
   port: 3000,
-  template_id: 'N1o2a1RPpzExxUQ9nGVB71d7vz3aqxz-dYMzApT3CEI',
+  template_id: 'N1o2a1RPpzExxUQ9nGVB7xbf5l1efKResYr99FWikgs',
   day: 6, // 默认6天后发送模板消息
   template: {
     "keyword1": {
+      "value": '公务员面试资格',
+      "color": "#fb0303"
+    },
+    "keyword2": {
       "value": '恭喜您获得公务员考试面试资格',
       "color": "#000"
     },
-    "keyword2": {
+    "keyword3": {
       "value": '点击查看详情',
       "color": "#000"
     }
