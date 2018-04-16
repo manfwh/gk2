@@ -153,15 +153,16 @@ router.post('/formid', async (ctx, next) => {
 
 
 
-
+// 公务员面试资格
 
 // 获取二维码
 router.get('/qr', async (ctx, next) => {
   let runeid = ctx.query.runeid;
   let getQrOptions = {
+    // 接口B
     url: `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${ctx.access_token}`,
     body: {
-      path: '/pages/help?runeid=' + runeid,
+      page: 'pages/help',
       scene: runeid,
       width: 214,
       line_color: { r: '65', g: '224', b: '95' }
