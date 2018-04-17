@@ -12,7 +12,7 @@ module.exports = {
   day: 6, // 默认6天后发送模板消息
   template: {
     "keyword1": {
-      "value": '公务员面试资格',
+      "value": '恭喜你进入面试',
       "color": "#fb0303"
     },
     "keyword2": {
