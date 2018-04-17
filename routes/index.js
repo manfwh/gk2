@@ -136,7 +136,7 @@ router.post('/formid', async (ctx, next) => {
     }
     request(options, (err, res, body) => {
       if (err) next(err)
-      UserModel.findOneAndUpdate({ openid }, { isSend: true })
+      UserModel.findOneAndUpdate({ openid: openid }, { $set: {isSend: true} })
     })
   }
 
@@ -178,6 +178,5 @@ router.get('/qr', async (ctx, next) => {
     })
   }
 })
-
 
 module.exports = router
