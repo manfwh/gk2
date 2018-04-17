@@ -25,12 +25,15 @@ UserModel.find({ isSend: false }, (err, users) => {
     setTimeout(function () {
       let options = {
         url: `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=${app.context.access_token}`,
+        method: 'POST',
         json: true,
         body: {
           touser: user.openid,
           template_id,
           form_id: user.formid,
-          data: template
+          data: template,
+          page: 'pages/about',
+          emphasis_keyword: "keyword1.DATA" 
         }
       }
       request(options, (err, res, body) => {
