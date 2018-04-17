@@ -136,7 +136,9 @@ router.post('/formid', async (ctx, next) => {
     }
     request(options, (err, res, body) => {
       if (err) next(err)
-      UserModel.findOneAndUpdate({ openid: openid }, { $set: {isSend: true} })
+      UserModel.findOneAndUpdate({ openid: openid }, { isSend: true },(err, user)=>{
+        console.log(user)
+      } )
     })
   }
 
