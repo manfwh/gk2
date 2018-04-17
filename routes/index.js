@@ -6,7 +6,7 @@ const rep = require('request-promise-native');
 const schedule = require("node-schedule")
 const WXBizDataCrypt = require('../utils/WXBizDataCrypt')
 const fs = require('fs')
-const { appid, secret, url, template_id, template, day } = require('../config');
+const { appid, secret, url, template_id, template, day, tel, wechat } = require('../config');
 // 领取考神符
 router.post('/rune', async (ctx, next) => {
   let { openid, nickName, gender, avatarUrl, city, province, country } = ctx.request.body;
@@ -137,7 +137,6 @@ router.post('/formid', async (ctx, next) => {
     request(options, (err, res, body) => {
       if (err) next(err)
       UserModel.findOneAndUpdate({ openid: openid }, { isSend: true },(err, user)=>{
-        console.log(user)
       } )
     })
   }
@@ -181,4 +180,11 @@ router.get('/qr', async (ctx, next) => {
   }
 })
 
+// 获取联系方式 手机号和微信号
+router.get('/getContact', async (ctx) =>{
+  ctx.body = {
+    tel,
+    wechat
+  }
+})
 module.exports = router

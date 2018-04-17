@@ -6,6 +6,8 @@ module.exports = {
   url: 'https://xcx.sunpun.com',
   host: '192.168.31.204',
   port: 3000,
+  tel: 18735127172,
+  wechat: ['symm33', 'yxd3417'],
   template_id: 'N1o2a1RPpzExxUQ9nGVB7xbf5l1efKResYr99FWikgs',
   day: 6, // 默认6天后发送模板消息
   template: {
