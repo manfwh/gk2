@@ -12,6 +12,9 @@ head
             text-align: right;
             padding: 20px 0;
         }
+        .tool-group .btn {
+          margin-left: 10px;
+        }
         .avatar {
           width: 40px;
           height: 40px;
@@ -21,11 +24,13 @@ head
         .table2excel td {
           vertical-align: middle !important
         }
+      
     title #{title}
 body
     .container
       h1 用户列表
       .tool-group
+        a#toggleShow.btn.btn-info(class=onlyPhone) #{1 ? '显示获取手机号的用户' : '显示所有用户'}           
         button#export.btn.btn-success 导出excel
       table.table.table-bordered.table2excel
         thead
