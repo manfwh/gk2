@@ -55,7 +55,7 @@ body
                     password: pass
                 }
             })
-            .then(res=>{
+            .then(function(res){
                 if(res.code == 1) {
                     location('/admin')
                 } else {
