@@ -194,7 +194,9 @@ router.get('/getContact', async (ctx) =>{
 // admin
 router.get('/admin', async (ctx) =>{
   let _runes = await RuneModel.find({}).populate('owner').exec()
-  let runes = _runes.filter((rune) => rune.owner)
+  // 排除小程序审核测试账号
+  let testUserRe = /^rdgztest/
+  let runes = _runes.filter((rune) => rune.owner && !testUserRe.test(rune.owner.nickName) )
   await ctx.render('index', {title: '后台管理', runes, moment})
 })
 module.exports = router
