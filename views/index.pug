@@ -42,7 +42,8 @@ body
             tr
               td(align="center" valign="middle") #{index}
               td
-                image(src=rune.owner.avatarUrl class="avatar")
+                if rune.owner.avatarUrl
+                  image(src=rune.owner.avatarUrl class="avatar")
                 | #{rune.owner.nickName}
               case rune.owner.gender
                 when 0
