@@ -206,7 +206,7 @@ router.get('/admin', async (ctx) =>{
     
   }
 
-  await ctx.render('index', {title: '后台管理', runes, moment, onlyShowPhone: !onlyShowPhone})
+  await ctx.render('index', {title: '后台管理', runes, moment, onlyShowPhone})
 })
 module.exports = router
 
