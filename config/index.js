@@ -3,7 +3,7 @@ module.exports = {
   secret: '32dc6fdd54a89b66f098783da2fe6ea6',
   // mongodbUrl:'mongodb://yidou:a199210206@ds063536.mlab.com:63536/gaokao',
   mongodbUrl: 'mongodb://localhost/gongkao',
-  url: 'http://xcx.sunpun.com',//
+  url: 'https://xcx.sunpun.com',//
   host: '192.168.31.204',
   port: 3000,
   tel: 18735127172,
