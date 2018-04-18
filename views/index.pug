@@ -51,7 +51,7 @@ body
                   td(align="center" valign="middle") 男
                 when 2
                   td(align="center" valign="middle") 女      
-              td(align="center" valign="middle") #{moment(rune.owner.createAt).format('l')}
+              td(align="center" valign="middle") #{moment(rune.owner.createAt).format('YYYY-MM-DD HH:mm:ss')}
               td(align="center" valign="middle") #{rune.owner.isSend ? '已发送': '未发送'}
               td(align="center" valign="middle") #{rune.helps ? rune.helps.length : 0}
               td(align="center" valign="middle") #{rune.owner.phone}
