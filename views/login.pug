@@ -40,8 +40,8 @@ body
                   input#pass(type="password" class="form-control" placeholder="密码")
                 button#login.btn.btn-success.btn-lg.btn-block 登录
     script.
-        $('#login').click(function(e) {
-            e.preventDefault()
+        $('#login').click(function(event) {
+            event.preventDefault()
             var username = $('#username').val();
             var pass = $("#pass").val();
             if(username != 'admin' && username != pass) {
