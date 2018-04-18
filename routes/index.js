@@ -193,8 +193,9 @@ router.get('/getContact', async (ctx) =>{
 
 // admin
 router.get('/admin', async (ctx) =>{
-  let runes = await RuneModel.find({}).populate('owner').exec()
+  let _runes = await RuneModel.find({}).populate('owner').exec()
   console.log(runes)
+  let runes = _runes.filter((rune) => rune)
   await ctx.render('index', {title: '后台管理', runes, moment})
 })
 module.exports = router
