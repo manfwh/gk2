@@ -1,0 +1,65 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(href='https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+    script(src='https://cdn.bootcss.com/jquery/1.12.0/jquery.min.js')
+    script(src='https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src="/js/jquery.tabel2excel.js")
+    style.
+        .tool-group {
+            text-align: right;
+            padding: 20px 0;
+        }
+        .avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-right: 15px;
+        }
+        .table2excel td {
+          vertical-align: middle !important
+        }
+    title #{title}
+body
+    .container
+      h1 用户列表
+      .tool-group
+        button#export.btn.btn-success 导出excel
+      table.table.table-bordered.table2excel
+        thead
+          tr
+            th 序号
+            th 用户
+            th 性别
+            th 注册时间
+            th 是否已发送服务通知
+            th 助力人数
+            th 手机号            
+        tbody
+          each rune, index in runes
+            tr
+              td(align="center" valign="middle") #{index}
+              td
+                image(src=rune.owner.avatarUrl class="avatar")
+                | #{rune.owner.nickName}
+              case rune.owner.gender
+                when 0
+                  td(align="center" valign="middle") 未知
+                when 1
+                  td(align="center" valign="middle") 男
+                when 2
+                  td(align="center" valign="middle") 女      
+              td(align="center" valign="middle") #{moment(rune.owner.createAt).format('l')}
+              td(align="center" valign="middle") #{rune.owner.isSend ? '已发送': '未发送'}
+              td(align="center" valign="middle") #{rune.hepls ? rune.hepls : 0}
+              td(align="center" valign="middle") #{rune.owner.phone}
+    script.
+      $("#export").click(function() {
+        $(".table2excel").table2excel({
+            exclude: ".noExl",
+            name: "用户列表",
+            filename: "用户列表"
+        });
+      })

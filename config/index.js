@@ -1,9 +1,9 @@
 module.exports = {
   appid: 'wxb0ce7dd74bfa7015',
   secret: '32dc6fdd54a89b66f098783da2fe6ea6',
-  // mongodbUrl:'mongodb://yidou:a199210206@ds063536.mlab.com:63536/gaokao',
-  mongodbUrl: 'mongodb://localhost/gongkao',
-  url: 'https://xcx.sunpun.com',
+  mongodbUrl:'mongodb://yidou:a199210206@ds063536.mlab.com:63536/gaokao',
+  // mongodbUrl: 'mongodb://localhost/gongkao',
+  url: 'http://192.168.31.204',//xcx.sunpun.com
   host: '192.168.31.204',
   port: 3000,
   tel: 18735127172,

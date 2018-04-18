@@ -6,6 +6,7 @@ const rep = require('request-promise-native');
 const schedule = require("node-schedule")
 const WXBizDataCrypt = require('../utils/WXBizDataCrypt')
 const fs = require('fs')
+const moment = require('moment')
 const { appid, secret, url, template_id, template, day, tel, wechat } = require('../config');
 // 领取考神符
 router.post('/rune', async (ctx, next) => {
@@ -187,4 +188,13 @@ router.get('/getContact', async (ctx) =>{
     wechat
   }
 })
+
+
+
+// admin
+router.get('/admin', async (ctx) =>{
+  let runes = await RuneModel.find({}).populate('owner').exec()
+  await ctx.render('index', {title: '后台管理', runes, moment})
+})
 module.exports = router
+

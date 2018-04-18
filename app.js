@@ -6,6 +6,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const mongoose = require('mongoose');
 const index = require('./routes/index')
+const views = require('koa-views')
 const request = require('request')
 const fs = require('fs')
 const UserModel = require('./model/user')
@@ -71,7 +72,9 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
-
+app.use(views(__dirname + '/views', {
+  extension: 'pug'
+}))
 // routes
 app.use(index.routes(), index.allowedMethods())
 
