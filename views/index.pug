@@ -30,7 +30,10 @@ body
     .container
       h1 用户列表
       .tool-group
-        a#toggleShow.btn.btn-info(class=onlyPhone) #{1 ? '显示获取手机号的用户' : '显示所有用户'}           
+        if onlyShowPhone
+          a.btn.btn-info(href='/admin') 显示所有用户
+        else
+          a.btn.btn-info(href='/admin?onlyShowPhone=true') 只显示获取手机号的用户
         button#export.btn.btn-success 导出excel
       table.table.table-bordered.table2excel
         thead
