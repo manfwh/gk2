@@ -1,5 +1,5 @@
 const Koa = require('koa')
-const app = new Koa()
+const session = require('koa-session');
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
@@ -9,6 +9,9 @@ const index = require('./routes/index')
 const views = require('koa-views')
 const request = require('request')
 const fs = require('fs')
+
+const app = new Koa()
+
 const UserModel = require('./model/user')
 const { appid, secret, url, template_id, template, day, mongodbUrl } = require('./config')
 // error handler
@@ -19,7 +22,7 @@ getAccess_token()
 setInterval(getAccess_token, 7200 * 1000)
 onerror(app)
 mongoose.connect(mongodbUrl);
-
+app.keys = ['some secret hurr'];
 // 启动服务后查询数据库还没有发送模板消息的用户， 启动定时任务
 UserModel.find({ isSend: false }, (err, users) => {
   users.forEach((user) => {
@@ -55,6 +58,11 @@ UserModel.find({ isSend: false }, (err, users) => {
 })
 
 
+app.keys = ['some secret hurr'];
+app.use(session({
+  key: appid,
+  maxAge: 86400000,
+}, app))
 // middlewares
 app.use(bodyparser({
   enableTypes: ['json', 'form', 'text']

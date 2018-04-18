@@ -7,6 +7,9 @@ const schedule = require("node-schedule")
 const WXBizDataCrypt = require('../utils/WXBizDataCrypt')
 const fs = require('fs')
 const moment = require('moment')
+const arraySort = require('array-sort');
+
+const check = require('../middlewares/check')
 const { appid, secret, url, template_id, template, day, tel, wechat } = require('../config');
 // 领取考神符
 router.post('/rune', async (ctx, next) => {
@@ -192,20 +195,42 @@ router.get('/getContact', async (ctx) =>{
 
 
 // admin
-router.get('/admin', async (ctx) =>{
-  let onlyShowPhone = ctx.query.onlyShowPhone;
+router.get('/admin', async (ctx, next) =>{
+  next()
+  let {onlyShowPhone, sortByCreateAt} = ctx.query;
   let _runes = await RuneModel.find({}).populate('owner').exec()
   let runes = null;
   // 排除小程序审核测试账号
   let testUserRe = /^rdgztest/
   if(onlyShowPhone) {
     runes = _runes.filter((rune) => rune.owner && !testUserRe.test(rune.owner.nickName) && rune.owner.phone)    
-  } else {
+  } 
+  else if(sortByCreateAt) {
+    runes = arraySort(_runes.filter((rune) => rune.owner && !testUserRe.test(rune.owner.nickName) ), 'owner.createAt')
+  } 
+  else {
     runes = _runes.filter((rune) => rune.owner && !testUserRe.test(rune.owner.nickName) )
-    
   }
 
   await ctx.render('index', {title: '后台管理', runes, moment, onlyShowPhone})
+}, check.checkLogin)
+router.get('/login', async (ctx, next) =>{
+  next()
+  await ctx.render('login')
+}, check.checkoutNotLogin)
+
+
+// 后台登录
+router.post('/res' , async (ctx) =>{
+  const { username, password} = ctx.request.body;
+  if(username == 'admin' && username == password) {
+    ctx.session.user = username;
+    ctx.body = {
+      code: 1
+    }
+  } else {
+    ctx.body = '用户名或密码错误'
+  }
 })
 module.exports = router
 
