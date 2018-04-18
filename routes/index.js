@@ -193,8 +193,7 @@ router.get('/getContact', async (ctx) =>{
 
 // admin
 router.get('/admin', async (ctx) =>{
-  let onlyShowPhone = ctx.params.onlyShowPhone;
-
+  let onlyShowPhone = ctx.query.onlyShowPhone;
   let _runes = await RuneModel.find({}).populate('owner').exec()
   let runes = null;
   // 排除小程序审核测试账号
