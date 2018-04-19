@@ -19,9 +19,13 @@ const UserShcema = new Schema({
     default: false
   },
   createAt: {
-    type: Date,
-    default: Date.now()
-  },
+    type: Date
+  }
 })
-
+UserSchema.pre('save', function (next) {
+  if (this.isNew) {
+    this.createAt = Date.now();
+  } 
+  next()
+});
 module.exports = mongoose.model('User', UserShcema)
