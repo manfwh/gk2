@@ -84,8 +84,10 @@ router.post('/help', async (ctx, next) => {
     }
   })
   let _user = await UserModel.findById(rune.owner).exec();
-  _user.score = Number(Math.random().toFixed(1) + _user.score)
-  await _user.save()
+  if(_user) {
+    _user.score = Number(Math.random().toFixed(1) + _user.score)
+    await _user.save()
+  }
   ctx.body = {
     code: 20000,
     msg: 'ok'
