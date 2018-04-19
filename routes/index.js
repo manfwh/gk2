@@ -121,7 +121,7 @@ router.post('/formid', async (ctx, next) => {
 
   setTimeout(() => {
     sendTemp(openid, ctx.access_token, template_id, formid, template)
-  }, 5000); //day * 24 * 60 * 60 * 1000
+  }, day * 24 * 60 * 60 * 1000); //
 
 
   function sendTemp(openid, token, template_id, form_id, data) {
