@@ -22,7 +22,7 @@ const UserShcema = new Schema({
     type: Date
   }
 })
-UserSchema.pre('save', function (next) {
+UserShcema.pre('save', function (next) {
   if (this.isNew) {
     this.createAt = Date.now();
   } 
