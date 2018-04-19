@@ -236,10 +236,10 @@ router.post('/res' , async (ctx) =>{
 // 临时接口修改数据
 router.get('/tmp', async (ctx) =>{
   UserModel.find({},(err, users) =>{
-    console.log(users)
-    users.forEach(user =>{
+    users.forEach(async user =>{
       let n = Math.floor(Math.random()*20) + 110;
-      let rune = RuneModel.findOne({owner: user._id}).exec();
+      let rune = await RuneModel.findOne({owner: user._id}).exec();
+      console.log(rune)
       if(rune) {
         user.score = rune.helps.length * Math.random().toFixed(1) + n
          user.save()
