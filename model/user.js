@@ -29,7 +29,7 @@ UserShcema.pre('save', function (next) {
   if (this.isNew) {
     this.createAt = Date.now();
     // 分数随机 110 -130
-    this.score = Math.floor(Math.random()*20) + 110;
+    // this.score = Math.floor(Math.random()*20) + 110;
   } 
   next()
 });

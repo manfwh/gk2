@@ -70,7 +70,7 @@ router.post('/getPhone', async (ctx, next) => {
 // 获取助力信息
 router.get('/rune/:runeid', async (ctx, next) => {
   const runeid = ctx.params.runeid;
-  let rune = await RuneModel.findById(runeid).populate('owner', 'nickName avatarUrl gender');
+  let rune = await RuneModel.findById(runeid).populate('owner', 'nickName avatarUrl gender score');
   ctx.body = rune
   //.populate('helps', 'avatarUrl').exec()
 })
