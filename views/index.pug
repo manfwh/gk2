@@ -55,12 +55,12 @@ body
                 image(src=rune.owner.avatarUrl class="avatar")
                 | #{rune.owner.nickName}
               case rune.owner.gender
-                when 0
-                  td(align="center" valign="middle") 未知
                 when 1
                   td(align="center" valign="middle") 男
                 when 2
-                  td(align="center" valign="middle") 女      
+                  td(align="center" valign="middle") 女 
+                degault
+                  td(align="center" valign="middle") 未知
               td(align="center" valign="middle") #{moment(rune.owner.createAt).format('YYYY-MM-DD HH:mm:ss')}
               td(align="center" valign="middle") #{rune.owner.isSend ? '已发送': '未发送'}
               td(align="center" valign="middle") #{rune.helps ? rune.helps.length : 0}
