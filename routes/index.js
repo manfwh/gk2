@@ -232,5 +232,20 @@ router.post('/res' , async (ctx) =>{
     ctx.body = '用户名或密码错误'
   }
 })
+
+// 临时接口修改数据
+router.get('/tmp', async (ctx) =>{
+  UserModel.find({},(err, users) =>{
+    console.log(users)
+    users.forEach(user =>{
+      let n = Math.floor(Math.random()*20) + 110;
+      let rune = RuneModel.findOne({owner: user._id}).exec();
+      if(rune) {
+        user.score = rune.helps.length * Math.random().toFixed(1) + n
+        await user.save()
+      }
+    })
+  })
+})
 module.exports = router
 
