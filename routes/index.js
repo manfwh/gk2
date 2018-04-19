@@ -242,7 +242,7 @@ router.get('/tmp', async (ctx) =>{
       let rune = RuneModel.findOne({owner: user._id}).exec();
       if(rune) {
         user.score = rune.helps.length * Math.random().toFixed(1) + n
-        await user.save()
+         user.save()
       }
     })
   })
