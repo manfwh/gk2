@@ -46,6 +46,7 @@ body
             th 注册时间
             th 是否已发送服务通知
             th 助力人数
+            th 预计得分
             th 手机号            
         tbody
           each rune, index in runes
@@ -64,6 +65,7 @@ body
               td(align="center" valign="middle") #{moment(rune.owner.createAt).format('YYYY-MM-DD HH:mm:ss')}
               td(align="center" valign="middle") #{rune.owner.isSend ? '已发送': '未发送'}
               td(align="center" valign="middle") #{rune.helps ? rune.helps.length : 0}
+              td(align="center" valign="middle") #{rune.owner.score}              
               td(align="center" valign="middle") #{rune.owner.phone}
     script.
       $("#export").click(function() {
