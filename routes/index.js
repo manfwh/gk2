@@ -83,6 +83,7 @@ router.post('/help', async (ctx, next) => {
       helps: user
     }
   })
+  console.log(rune)
   let _user = await UserModel.findById(rune.owner).exec();
   _user.score += Math.random().toFixed(1)
   await user.save()
